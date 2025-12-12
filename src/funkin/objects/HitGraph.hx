@@ -63,10 +63,6 @@ class HitGraph extends Sprite {
 		_width = Width;
 		_height = Height;
 
-		var bm = new BitmapData(Width, Height);
-		bm.draw(this);
-		bitmap = new Bitmap(bm);
-
 		_axis = new Shape();
 		_axis.x = _labelWidth + 10;
 
@@ -220,10 +216,6 @@ class HitGraph extends Sprite {
 
 			gfx.endFill();
 		}
-
-		var bm = new BitmapData(_width, _height);
-		bm.draw(this);
-		bitmap = new Bitmap(bm);
 	}
 
 	public function fitX(x:Float) {
