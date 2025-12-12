@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- _________________________ Application Settings _________________________ -->
+
+	<app title="Friday Night Funkin': Kade Engine" file="Kade Engine" packageName="com.kadedev.kadeengine" package="com.kadedev.kadeengine" main="Main" version="0.2.7.1" company="kadedev" />
+
+	<!-- ____________________________ Window Settings ___________________________ -->
+
+	<!--These window settings apply to all targets-->
+	<window width="1280" height="720" background="#000000" hardware="true" vsync="false" />
+
+	<!--HTML5-specific-->
+	<window if="html5" resizable="true" />
+
+	<!--Desktop-specific-->
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
+
+	<!-- _____________________________ Path Settings ____________________________ -->
+
+	<set name="BUILD_DIR" value="export/debug" if="debug" />
+	<set name="BUILD_DIR" value="export/release" unless="debug" />
+	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
+
+	<classpath name="src" />
+	
+	<assets path="assets"/>
+
+	<assets path='LICENSE' rename='LICENSE.txt' />
+	<!-- <template path='mods' /> -->
+	
+	<!-- <assets path="CHANGELOG.md" rename='changelog.txt'/> -->
+
+	<haxedef name="HXCPP_CHECK_POINTER" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE" />
+
+	<!-- _______________________________ Libraries ______________________________ -->
+
+	<haxelib name="lime" version="8.1.2"/>
+	<haxelib name="openfl" version="9.3.3"/>
+	<haxelib name="flixel" version="5.5.0"/>
+
+	<!--In case you want to use the addons package-->
+	<haxelib name="flixel-addons" version="3.0.2"/>
+	<haxelib name="flixel-animate" />
+	<haxelib name="moonchart" />
+	<haxelib name="hscript"/>
+
+	<haxelib name="actuate" version="1.9.0"/>
+	<haxelib name="extension-webm"/> <!-- Make sure to use https://github.com/KadeDev/extension-webm/ -->
+
+	<!--In case you want to use the ui package-->
+	<haxelib name="flixel-ui" />
+	<!--Disable the Flixel core focus lost screen-->
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+
+	<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+
+	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
+
+	<!-- _________________________________ Custom _______________________________ -->
+
+	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+	
+	<icon path="icons/icon8.png" size='8'/>
+	<icon path="icons/icon16.png" size='16'/>
+	<icon path="icons/icon32.png" size='32'/>
+	<icon path="icons/icon64.png" size='64'/>
+	<icon path="icons/iconOG.png" />
+
+	<haxeflag name="-D no-traces" unless="debug" />
+	<haxeflag name="--dce full" if="release" />
+	<haxedef name="no-deprecation-warnings"/>
+
+	<assets path="alsoft.txt" rename="alsoft.ini" type="text" if="windows"/>
+	<assets path="alsoft.txt" rename="alsoft.conf" type="text" unless="windows"/>
+
+	<!-- Defines whether the Discord client should be enabled. Only works on desktop. -->
+	<haxedef name="FEATURE_DISCORD" if="desktop" />
+	<!-- Defines whether the file system can be read/written directly. Does not work in browser. -->
+	<haxedef name="FEATURE_FILESYSTEM" if="desktop" />
+	<!-- Defines whether the Thread class can be used. -->
+	<haxedef name="FEATURE_MULTITHREADING" if="cpp" />
+
+</project>
