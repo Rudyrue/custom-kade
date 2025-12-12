@@ -383,8 +383,9 @@ class PlayState extends FunkinState {
 		var goods:Int = Judgement.list[1].hits;
 		var bads:Int = Judgement.list[2].hits;
 		var shits:Int = Judgement.list[3].hits;
+		var misses:Int = FlxMath.maxInt(0, comboBreaks - shits);
 
-		var resultText:String = 'Sicks: $sicks\nGoods: $goods\nBads: $bads\nShits: $shits\nCombo Breaks: $comboBreaks';
+		var resultText:String = 'Sicks: $sicks\nGoods: $goods\nBads: $bads\nShits: $shits\nMisses: $misses';
 
 		judgeCounter.text = resultText;
 	}
@@ -410,7 +411,8 @@ class PlayState extends FunkinState {
 		hits.push({
 			time: note.time,
 			diff: 180,
-			judge: 'miss'
+			judge: 'miss',
+			countMean: false
 		});
 
 		accuracy = updateAccuracy();

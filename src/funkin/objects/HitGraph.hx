@@ -20,6 +20,7 @@ typedef HitData = {
 	var time:Float;
 	var diff:Float;
 	var judge:String;
+	var ?countMean:Bool;
 }
 
 /**

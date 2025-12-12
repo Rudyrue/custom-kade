@@ -68,6 +68,7 @@ class ResultsScreen extends FlxSubState {
 		// fuck it im just gonna manually calculate it i can't be arsed
 		var mean:Float = 0;
 		for (hit in data.hits) {
+			if (hit.countMean == false) continue;
 			mean += hit.diff;
 		}
 		mean /= data.hits.length;
