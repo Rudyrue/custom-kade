@@ -18,7 +18,6 @@ class TitleState extends FunkinState {
 		Conductor.bpm = 102;
 		Conductor.inst = FlxG.sound.load(Paths.music('freakyMenu'), 0, true);
 		curWacky = FlxG.random.getObject(getIntroTexts());
-		trace(Paths.text('data/introText.txt').split('\n'));
 
 		add(titleGroup = new FlxTypedSpriteGroup<FunkinSprite>());
 
