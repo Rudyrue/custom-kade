@@ -1,7 +1,9 @@
 package funkin.backend;
 
+#if FEATURE_STEPMANIA
 import moonchart.formats.StepMania;
 import moonchart.formats.BasicFormat.BasicNoteType;
+#end
 
 typedef Event = {
 	var name:String;
@@ -119,6 +121,7 @@ class Song {
 		return Paths.exists('songs/$song/$difficulty.json');
 	}
 
+	#if FEATURE_STEPMANIA
 	public static function getSimfilePath(song:String):String {
 		var path:String = '';
 		for (file in FileSystem.readDirectory('assets/sm/$song')) {
@@ -133,8 +136,10 @@ class Song {
 	public static function simfileExists(song:String):Bool {
 		return FileSystem.exists(getSimfilePath(song));
 	}
+	#end
 }
 
+#if FEATURE_STEPMANIA
 class FNFChart extends moonchart.formats.fnf.FNFKade {
  	public function new() {
     	super();
@@ -146,3 +151,4 @@ class FNFChart extends moonchart.formats.fnf.FNFKade {
 		}
   	}
 }
+#end

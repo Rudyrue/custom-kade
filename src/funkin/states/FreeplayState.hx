@@ -1,6 +1,6 @@
 package funkin.states;
 
-import moonchart.formats.StepMania;
+#if FEATURE_STEPMANIA import moonchart.formats.StepMania; #end
 import funkin.objects.CharIcon;
 import funkin.backend.Scores.ScoreData;
 
@@ -75,6 +75,7 @@ class FreeplayState extends FunkinState {
 			addSong(id, icon);
 		}
 
+		#if FEATURE_STEPMANIA
 		for (dir in FileSystem.readDirectory('assets/sm')) {
 			if (!FileSystem.isDirectory('assets/sm/$dir')) continue;
 
@@ -87,6 +88,7 @@ class FreeplayState extends FunkinState {
 			
 			addSong(sm.data.TITLE, 'sm');
 		}
+		#end
 
 		changeSelection();
 

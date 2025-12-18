@@ -323,15 +323,12 @@ class DebugLogWriter
 	var logLevel:Int;
 
 	var active = false;
-	#if FEATURE_FILESYSTEM
 	var file:sys.io.FileOutput;
-	#end
 
 	public function new(logLevelParam:String)
 	{
 		logLevel = LOG_LEVELS.indexOf(logLevelParam);
 
-		#if FEATURE_FILESYSTEM
 		printDebug("Initializing log file...");
 
 		var logFilePath = '$LOG_FOLDER/${Sys.time()}.log';
@@ -348,10 +345,6 @@ class DebugLogWriter
 		printDebug('Creating log file $logFilePath');
 		file = sys.io.File.write(logFilePath, false);
 		active = true;
-		#else
-		printDebug("Won't create log file; no file system access.");
-		active = false;
-		#end
 
 		// Get the absolute time in seconds. This lets us show relative time in log, which is more readable.
 		startTime = getTime(true);
@@ -405,7 +398,6 @@ class DebugLogWriter
 		var ts = FlxStringUtil.formatTime(getTime(), true);
 		var msg = '$ts [${logLevel.rpad(' ', 5)}] ${input.join('')}';
 
-		#if FEATURE_FILESYSTEM
 		if (active && file != null)
 		{
 			if (shouldLog(logLevel))
@@ -415,7 +407,6 @@ class DebugLogWriter
 				file.flush();
 			}
 		}
-		#end
 
 		// Output text to the debug console directly.
 		if (shouldLog(logLevel))

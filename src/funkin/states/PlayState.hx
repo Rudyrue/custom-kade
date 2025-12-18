@@ -13,7 +13,7 @@ import flixel.util.FlxStringUtil;
 import funkin.objects.PlayField;
 import funkin.substates.PauseMenu;
 import funkin.substates.ResultsScreen;
-import moonchart.formats.StepMania;
+#if FEATURE_STEPMANIA import moonchart.formats.StepMania; #end
 import funkin.objects.Countdown;
 import funkin.substates.OptionsMenu;
 import funkin.objects.HitGraph;
@@ -184,8 +184,13 @@ class PlayState extends FunkinState {
 		playfield.noteMiss = noteMiss;
 		playfield.sustainHit = sustainHit;
 		playfield.ghostTap = ghostTap;
+
+		#if FEATURE_STEPMANIA 
 		if (isSimfile) loadSimfile(songID);
-		else loadSong(songID);
+		else
+		#end 
+		loadSong(songID);
+
 		playfield.rate = Conductor.rate;
 		playfield.scrollSpeed = (Settings.data.scrollSpeed == 1 ? song.speed : Settings.data.scrollSpeed);
 		playfield.scrollSpeed /= Conductor.rate;
@@ -521,6 +526,7 @@ class PlayState extends FunkinState {
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconSpacing * 2;
 	}
 
+	#if FEATURE_STEPMANIA
 	function loadSimfile(songID:String) {
 		var simfile = new StepMania().fromFile(Song.getSimfilePath(songID));
 		songName = simfile.data.TITLE;
@@ -545,6 +551,7 @@ class PlayState extends FunkinState {
 
 		playfield.load(song);
 	}
+	#end
 
 	function loadSong(songID:String) {
 		song = Song.load(songID, Difficulty.current);
